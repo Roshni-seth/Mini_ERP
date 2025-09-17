@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Products</h1>
+
+<form method="post" class="mb-3">
+  {% csrf_token %}
+  <input type="text" name="name" placeholder="Name" required>
+  <input type="number" name="price" placeholder="Price" required>
+  <input type="number" name="stock" placeholder="Stock" required>
+  <select name="supplier" required>
+    {% for s in suppliers %}
+      <option value="{{ s.id }}">{{ s.name }}</option>
+    {% endfor %}
+  </select>
+  <button class="btn btn-primary">Add Product</button>
+</form>
+
+<table class="table table-bordered">
+  <tr><th>Name</th><th>Price</th><th>Stock</th><th>Supplier</th></tr>
+  {% for p in products %}
+    <tr>
+      <td>{{ p.name }}</td>
+      <td>{{ p.price }}</td>
+      <td>{{ p.stock }}</td>
+      <td>{{ p.supplier.name }}</td>
+    </tr>
+  {% endfor %}
+</table>
+{% endblock %}

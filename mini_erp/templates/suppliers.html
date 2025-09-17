@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1> Suppliers</h1>
+
+<form method="post" class="mb-3">
+  {% csrf_token %}
+  <input type="text" name="name" placeholder="Name" required>
+  <input type="text" name="contact" placeholder="Contact">
+  <input type="text" name="address" placeholder="Address">
+  <button class="btn btn-primary">Add Supplier</button>
+</form>
+
+<table class="table table-bordered">
+  <tr><th>Name</th><th>Contact</th><th>Address</th></tr>
+  {% for s in suppliers %}
+    <tr>
+      <td>{{ s.name }}</td>
+      <td>{{ s.contact }}</td>
+      <td>{{ s.address }}</td>
+    </tr>
+  {% endfor %}
+</table>
+{% endblock %}
